@@ -34,6 +34,23 @@ class Book < ActiveRecord::Base
     end
   end
 
+  def set_pages_count_and_cover
+    if pdf_file
+      file_pdf = pdf_file
+      pdf = PDF::Reader.new(file_pdf.path)
+      self.pages_count = pdf.page_count
+
+      to_delete_filepath = "#{Rails.root}/public/uploads/#{file_pdf.filename.split(".").first}_cover_#{Time.now.to_i}_#{rand(9999)}.png"
+      im = Magick::Image.read(file_pdf.path+"[0]")
+      im[0].write to_delete_filepath
+
+      self.bookcover = File.open(to_delete_filepath)
+
+      save!
+      File.delete to_delete_filepath
+    end
+  end
+
 
   private
 
@@ -42,7 +59,8 @@ class Book < ActiveRecord::Base
     if bookfile.file.extension == 'djvu' && bookfile_pdf.file.nil?
       self.djvu_state = :queued
       self.save
-      # process by sidekiq
+
+      DjvuToPdfWorker.perform_async(self.id)
     end
   end
 
@@ -71,24 +89,6 @@ class Book < ActiveRecord::Base
 
   def set_page
     self.page = 1 unless self.page
-  end
-
-
-  def set_pages_count_and_cover
-    if pdf_file
-      file_pdf = pdf_file
-      pdf = PDF::Reader.new(file_pdf.path)
-      self.pages_count = pdf.page_count
-
-      to_delete_filepath = "#{Rails.root}/public/uploads/#{file_pdf.filename.split(".").first}_cover_#{Time.now.to_i}_#{rand(9999)}.png"
-      im = Magick::Image.read(file_pdf.path+"[0]")
-      im[0].write to_delete_filepath
-
-      self.bookcover = File.open(to_delete_filepath)
-
-      save!
-      File.delete to_delete_filepath
-    end
   end
 
 end
