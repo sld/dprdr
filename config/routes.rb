@@ -1,5 +1,9 @@
 Dpreader::Application.routes.draw do
-  resources :books
+  resources :books do
+    collection do
+      get 'try_as_guest'
+    end
+  end
 
   root :to => "home#index"
 
