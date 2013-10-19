@@ -3,7 +3,7 @@ class CreateBooks < ActiveRecord::Migration
     create_table :books do |t|
       t.string :name
       t.string :good_name
-      t.integer :page
+      t.integer :page, :default => 1
       t.datetime :last_access
       t.string :bookfile
       t.string :bookcover

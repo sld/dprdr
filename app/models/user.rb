@@ -11,5 +11,18 @@ class User < ActiveRecord::Base
 
 
   has_many :books
-  
+
+  validate :max_books_count_validate
+
+
+  protected
+
+
+  def max_books_count_validate
+    max_books_count = 5
+    if books.count > max_books_count
+      errors.add(:books, "Books count can not be greater than #{max_books_count}")
+    end
+  end
+
 end
