@@ -22,6 +22,8 @@ gem 'rmagick'
 
 gem 'state_machine'
 
+gem 'sidekiq'
+
 
 group :assets, :production do
   gem 'uglifier', '>= 1.0.3'
