@@ -37,7 +37,7 @@
 
 'use strict';
 
-var DEFAULT_URL = '/uploads/book/bookfile/2/Information_Extraction_and_Named_Entity_Recognition_v2.pdf';
+var DEFAULT_URL = '2';
 var DEFAULT_SCALE = 'auto';
 var DEFAULT_SCALE_DELTA = 1.1;
 var UNKNOWN_SCALE = 0;
@@ -4288,7 +4288,8 @@ document.addEventListener('DOMContentLoaded', function webViewerLoad(evt) {
   PDFView.initialize();
 
   var params = PDFView.parseQueryString(document.location.search.substring(1));
-  var file = params.file || DEFAULT_URL;
+  var url = document.getElementById("filename_for_pdfjs").getAttribute("data-value");
+  var file = url || DEFAULT_URL;
 
 
   var fileInput = document.createElement('input');
