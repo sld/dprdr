@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree ./pdfjs_fork/.
+//= require ./pdfjs_fork/pdf
+//= require ./pdfjs_fork/compatibility
+//= require ./pdfjs_fork/l10n
+//= require ./pdfjs_fork/viewer
