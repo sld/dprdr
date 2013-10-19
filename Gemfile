@@ -18,6 +18,7 @@ gem 'carrierwave'
 gem 'honeybadger'
 
 gem 'pdf-reader'
+gem 'rmagick'
 
 
 group :assets, :production do

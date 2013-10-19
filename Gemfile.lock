@@ -142,6 +142,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    rmagick (2.13.2)
     rolify (3.2.0)
     rspec-core (2.14.6)
     rspec-expectations (2.14.3)
@@ -202,6 +203,7 @@ DEPENDENCIES
   pg
   quiet_assets
   rails (= 3.2.15)
+  rmagick
   rolify
   rspec-rails
   therubyracer (>= 0.10.2)
