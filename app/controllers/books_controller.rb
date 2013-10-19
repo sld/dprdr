@@ -3,7 +3,7 @@ class BooksController < ApplicationController
 
   def index
     raise CanCan::AccessDenied.new("Sign In or Try Guest User!", :index, Book) unless is_guest? || current_user
-    @books = current_or_guest_user.books
+    @books = current_or_guest_user.books.order("updated_at desc")
   end
 
 
@@ -36,6 +36,7 @@ class BooksController < ApplicationController
     @book = Book.find params[:id]
     raise CanCan::AccessDenied.new("Can not read book! Is this yours?", :read, @book) unless current_or_guest_user.books.include?(@book)
     @book.update_column :last_access, Time.now
+    @bookfile_url = (@book.bookfile.file.extension == 'pdf' ? @book.bookfile.url : @book.bookfile_pdf.url)
     render :layout => false
   end
 end

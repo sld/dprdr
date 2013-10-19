@@ -11,9 +11,17 @@
         <%= image_tag book.bookcover_url %>
     <% end %>
     <ul>
-      <li><a href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%>> Read now </a></li>
+      <% if book.djvu_state && !book.djvu_state?(:finished) %>
+        <li>Wait until your djvu will be processed. It takes 1 - 5 minutes.</li>
+      <% else %>
+        <li><a href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%>> Read now </a></li>
+      <% end %>
       <li>Page - <%= book.page %></li>
-      <li>Progress - <%= book.progress %>%</li>
+      <% if book.progress %>
+        <li>Progress - <%= book.progress %>%</li>
+      <% end %>
       <li>Last Read - <%= book.last_access || "Not Read Yet" %></li>
+      <li>Format - <%= book.bookfile.file.extension %></li>
+      <li>Djvu processing status - <%= book.djvu_state %></li>
     </ul>
 <% end %>
