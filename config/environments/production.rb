@@ -46,7 +46,7 @@ Dpreader::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( pdfjs_application.js viewer.css  )
+  config.assets.precompile += %w( viewer.css pdfjs_fork/pdf.worker.js pdfjs_application.js  )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
