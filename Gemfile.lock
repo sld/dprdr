@@ -45,6 +45,10 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
+    carrierwave (0.9.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
     coderay (1.1.0)
     daemon_controller (1.1.7)
     database_cleaner (1.0.1)
@@ -71,6 +75,8 @@ GEM
       rails (>= 3, < 5)
     highline (1.6.19)
     hike (1.2.3)
+    honeybadger (1.8.1)
+      json
     i18n (0.6.5)
     journey (1.0.4)
     jquery-rails (3.0.4)
@@ -172,11 +178,13 @@ DEPENDENCIES
   binding_of_caller
   cancan
   capistrano (~> 2.15)
+  carrierwave
   database_cleaner (= 1.0.1)
   devise
   email_spec
   factory_girl_rails
   figaro
+  honeybadger
   jquery-rails
   passenger
   pg

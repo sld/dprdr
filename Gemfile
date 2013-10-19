@@ -13,6 +13,10 @@ gem 'jquery-rails'
 
 gem 'capistrano', '~> 2.15'
 
+gem 'carrierwave'
+
+gem 'honeybadger'
+
 
 group :assets, :production do
   gem 'uglifier', '>= 1.0.3'
