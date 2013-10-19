@@ -14,6 +14,10 @@ gem 'jquery-rails'
 gem 'capistrano', '~> 2.15'
 
 
+group :assets do
+  gem 'uglifier'
+end
+
 group :production do
   gem 'therubyracer'
 end
