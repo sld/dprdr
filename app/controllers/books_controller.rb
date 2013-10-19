@@ -13,6 +13,7 @@ class BooksController < ApplicationController
 
 
   def viewer
+    @book = Book.find params[:id]
     render :layout => false
   end
 end
