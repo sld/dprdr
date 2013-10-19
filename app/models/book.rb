@@ -18,6 +18,18 @@ class Book < ActiveRecord::Base
   end
 
 
+  # Only if book not if PDF
+  state_machine :djvu_state, :initial => :queued do
+    event :process do
+      transition :queued => :processing
+    end
+
+    event :finish_process do
+      transition :processing => :finished
+    end
+  end
+
+
   private
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131019030727) do
+ActiveRecord::Schema.define(:version => 20131019150531) do
 
   create_table "books", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20131019030727) do
     t.integer  "pages_count"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "state"
   end
 
   add_index "books", ["name"], :name => "index_books_on_name"

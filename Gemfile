@@ -20,6 +20,8 @@ gem 'honeybadger'
 gem 'pdf-reader'
 gem 'rmagick'
 
+gem 'state_machine'
+
 
 group :assets, :production do
   gem 'uglifier', '>= 1.0.3'
