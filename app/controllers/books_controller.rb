@@ -14,6 +14,8 @@ class BooksController < ApplicationController
 
   def viewer
     @book = Book.find params[:id]
+    authorize! :read, @book
+
     render :layout => false
   end
 end

@@ -28,5 +28,14 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
+    user ||= User.new
+
+
+    if user.books.present?
+      can :read, Book do |book|
+        user.books.include?(book)
+      end
+    end
+
   end
 end
