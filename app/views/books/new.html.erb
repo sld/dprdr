@@ -1,0 +1,13 @@
+<%= form_for @book, :html => {:multipart => true} do |f| %>
+    <% if @book.errors.present? %>
+        <%= @book.errors.full_messages.each do |msg| %>
+          <p><%= msg %></p>
+        <% end %>
+    <% end %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <br/>
+    <%= f.file_field :bookfile %>
+    <br/>
+    <%= f.submit "Upload" %>
+<% end %>
