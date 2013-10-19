@@ -763,6 +763,11 @@ html[dir='rtl'] .dropdownToolbarButton {
   border-bottom: 1px rgba(255, 255, 255, .5) solid;
 }
 
+a#back_to_books{
+    font-size: 17px;
+    color: white;
+}
+
 html[dir='ltr'] .splitToolbarButton:first-child,
 html[dir='ltr'] .toolbarButton:first-child,
 html[dir='rtl'] .splitToolbarButton:last-child,
