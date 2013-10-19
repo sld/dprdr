@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
 
   def index
-    authorize! :index, Book
+    raise CanCan::AccessDenied.new("Sign In or Try Guest User!", :index, Book) unless is_guest? || current_user
   end
 
 
