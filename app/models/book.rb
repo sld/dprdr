@@ -45,10 +45,12 @@ class Book < ActiveRecord::Base
     pdf = PDF::Reader.new(self.bookfile.file.path)
     self.pages_count = pdf.page_count
 
-    to_delete_filepath = "#{Rails.root}/public/uploads/#{bookfile.file.filename.split(".").first}_c11over.png"
+    to_delete_filepath = "#{Rails.root}/public/uploads/#{bookfile.file.filename.split(".").first}_cover_#{Time.now.to_i}_#{rand(9999)}.png"
     im = Magick::Image.read(self.bookfile.file.path+"[0]")
     im[0].write to_delete_filepath
+
     self.bookcover = File.open(to_delete_filepath)
+
     save!
     File.delete to_delete_filepath
   end
