@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   validate :max_books_count_validate
 
+  before_create :set_default_book
+
 
   protected
 
@@ -23,6 +25,13 @@ class User < ActiveRecord::Base
     if books.count > max_books_count
       errors.add(:books, "Books count can not be greater than #{max_books_count}")
     end
+  end
+
+
+  def set_default_book
+    book = self.books.build
+    book.bookfile = File.open("#{Rails.root}/public/Notes_from_the_Underground_NT.pdf")
+    book.save!
   end
 
 end
