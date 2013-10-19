@@ -66,7 +66,7 @@ var FindStates = {
 };
 
 PDFJS.imageResourcesPath = './images/';
-  PDFJS.workerSrc = '/assets/pdfjs_fork/pdf.worker.js';
+  PDFJS.workerSrc = '/pdf.worker.js';
 
 var mozL10n = document.mozL10n || document.webL10n;
 

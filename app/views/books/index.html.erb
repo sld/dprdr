@@ -4,7 +4,7 @@
 <% @books.each do |book| %>
     <h2><%= book.name %></h2>
     <ul>
-      <li><a href=<%="books/#{book.id}/viewer?#page=#{book.page}"%>> Read now </a></li>
+      <li><a href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%>> Read now </a></li>
       <li>Page - <%= book.page %></li>
       <li>Progress - <%= book.progress %>%</li>
       <li>Last Read - <%= book.last_access || "Not Read Yet" %></li>
