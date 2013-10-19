@@ -10,13 +10,13 @@
     <li>
         <%= link_to 'Register and Get Full Access!', '#'  %>
         <%= link_to 'My Books', books_path %>
+        <%= link_to 'Sign in', new_user_session_path %>
     </li>
   <% else %>
     <li>
         <%= link_to 'Try as Guest! (Goto books)', books_path %>
-    </li>
-    <li>
         <%= link_to 'Register and Get Full Access!', new_user_registration_path  %>
+        <%= link_to 'Sign in', new_user_session_path %>
     </li>
   <% end %>
 </ul>
