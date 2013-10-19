@@ -17,6 +17,8 @@ gem 'carrierwave'
 
 gem 'honeybadger'
 
+gem 'pdf-reader'
+
 
 group :assets, :production do
   gem 'uglifier', '>= 1.0.3'
