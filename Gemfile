@@ -21,6 +21,11 @@ group :assets, :production do
 end
 
 
+group :production do
+  gem "passenger"
+end
+
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
