@@ -14,7 +14,7 @@ class BooksController < ApplicationController
 
   def viewer
     @book = Book.find params[:id]
-    raise CanCan::AccessDenied.new("Can not read not your book!", :read, @book) unless current_or_guest_user.books.include?(@book)
+    raise CanCan::AccessDenied.new("Can not read book! Is this yours?", :read, @book) unless current_or_guest_user.books.include?(@book)
 
     render :layout => false
   end
