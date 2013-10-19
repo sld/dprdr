@@ -10,4 +10,9 @@ class BooksController < ApplicationController
     guest_user
     redirect_to action: :index
   end
+
+
+  def viewer
+    render :layout => false
+  end
 end
