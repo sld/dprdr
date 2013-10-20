@@ -14,7 +14,14 @@
     <% @books.each do |book| %>
     <div class="column6">
         <div class="section book-item shadow white rc">
-            <div class="title"><%= book.name %></div>
+            <div class="title">
+                <% if book.name.length > 38%>
+                    <%= book.name[0...38] %>...
+                <% else %>
+                    <%= book.name %>
+                <% end %>
+
+            </div>
             <div class="row">
                 <div class="column6">
                     <% if book.bookcover? %>
@@ -48,15 +55,16 @@
                         <div class="li">Last Read: <br> <%= book.last_access || "Not Read Yet" %></div>
 
                         <% if book.djvu_state %>
-                        <li>Djvu processing status - <%= book.djvu_state %></li>
+                        <div class="li">Djvu processing status - <%= book.djvu_state %></div>
                         <% end %>
-                        <% if current_user && !book.djvu_state?(:processing) %>
-                        <%= link_to "Delete book", book_path(book), :method => :delete, :confirm => "Are you sure for delete book?" %>
-                        <% end %>
+
                         <% if book.djvu_state && !book.djvu_state?(:finished) %>
                         <div class="li">Wait until your djvu will be process. It takes 5 - 15 minutes.</div>
                         <% else %>
-                        <li><a href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%>> Read now </a></li>
+                        <div class="li"><a class="btn green rc" href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%>><span class="genericon genericon-standard"></span>Read now </a></div>
+                        <% end %>
+                        <% if current_user && !book.djvu_state?(:processing) %>
+                        <%= link_to "", book_path(book), :method => :delete, :confirm => "Are you sure for delete book?", :class => "genericon genericon-close-alt font-red" %>
                         <% end %>
                     </div>
                 </div>
