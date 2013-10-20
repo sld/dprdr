@@ -1,33 +1,68 @@
-<h1>Books#index</h1>
-<p>Find me in app/views/books/index.html.erb</p>
-
+<div class="section shadow white rc">
+<!--<h2>My Books</h2>-->
 <% if current_user %>
-    <%= link_to "Upload book", new_book_path %>
-    <p>Limit: <%= current_user.books.count %> / <%= Book::MAX_BOOKS_COUNT %> </p>
+    <div class="row book">
+        <div class="column6 limit"><span class="icon-archive font-green"></span> Books limit: <%= current_user.books.count %> / <%= Book::MAX_BOOKS_COUNT %></div>
+        <div class="column6 text-right">
+            <%= link_to( "<span class='genericon genericon-cloud-upload'></span>Upload book".html_safe, new_book_path, :class => 'btn big blue rc' ) %>
+        </div>
+    </div>
 <% end %>
+</div>
 
-<% @books.each do |book| %>
-    <h2><%= book.name %></h2>
-    <% if book.bookcover? %>
-        <%= image_tag book.bookcover_url %>
+<div class="row">
+    <% @books.each do |book| %>
+    <div class="column6">
+        <div class="section book-item shadow white rc">
+            <div class="title"><%= book.name %></div>
+            <div class="row">
+                <div class="column6">
+                    <% if book.bookcover? %>
+                        <a class="img" href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%>>
+                            <%= image_tag book.bookcover_url, :class => "border-x5-solid border-light-grey rc" %>
+                        </a>
+                    <% end %>
+                </div>
+                <div class="column6">
+                    <div class="book-item-list">
+                        <div class="li">Book format:
+                            <% if book.bookfile.file.extension == "pdf" %>
+                            <strong class="pdf">pdf</strong>
+                            <% else %>
+                            <strong class="djvu">djvu</strong>
+                            <% end %>
+                        </div>
+
+                        <div class="li">Total pages: <strong class="font-blue"><%= book.pages_count %></strong></div>
+                        <div class="li">Current page: <strong class="font-green"><%= book.page %></strong></div>
+                        <% if book.progress %>
+                        <div class="li">Progress:
+                            <div class="progress">
+                                <div class="unload">
+                                    <div class="load" style="width: <%= book.progress %>%"></div>
+                                    <div class="load-pct"><%= book.progress %>%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <% end %>
+                        <div class="li">Last Read: <br> <%= book.last_access || "Not Read Yet" %></div>
+
+                        <% if book.djvu_state %>
+                        <li>Djvu processing status - <%= book.djvu_state %></li>
+                        <% end %>
+                        <% if current_user && !book.djvu_state?(:processing) %>
+                        <%= link_to "Delete book", book_path(book), :method => :delete, :confirm => "Are you sure for delete book?" %>
+                        <% end %>
+                        <% if book.djvu_state && !book.djvu_state?(:finished) %>
+                        <div class="li">Wait until your djvu will be process. It takes 5 - 15 minutes.</div>
+                        <% else %>
+                        <li><a href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%>> Read now </a></li>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <% end %>
-    <ul>
-      <% if book.djvu_state && !book.djvu_state?(:finished) %>
-        <li>Wait until your djvu will be process. It takes 5 - 15 minutes.</li>
-      <% else %>
-        <li><a href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%>> Read now </a></li>
-      <% end %>
-      <li>Page - <%= book.page %></li>
-      <% if book.progress %>
-        <li>Progress - <%= book.progress %>%</li>
-      <% end %>
-      <li>Last Read - <%= book.last_access || "Not Read Yet" %></li>
-      <li>Format - <%= book.bookfile.file.extension %></li>
-      <% if book.djvu_state %>
-        <li>Djvu processing status - <%= book.djvu_state %></li>
-      <% end %>
-      <% if current_user && !book.djvu_state?(:processing) %>
-        <%= link_to "Delete book", book_path(book), :method => :delete, :confirm => "Are you sure for delete book?" %>
-      <% end %>
-    </ul>
-<% end %>
+</div>
+
