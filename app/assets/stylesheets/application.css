@@ -321,7 +321,7 @@ footer.section .row .column5 {
     left: 0;
 }
 .form {
-    margin: 30px 0;
+    /*margin: 30px 0;*/
 }
 .form input[type=text],
 .form input[type=email],
@@ -332,6 +332,7 @@ footer.section .row .column5 {
     box-sizing: border-box;
     font-size: 20px;
     height: 40px;
+    background: #f6fafc;
     line-height: 40px;
     padding: 0 10px;
     -webkit-border-radius: 5px;
@@ -346,6 +347,7 @@ footer.section .row .column5 {
 .form .field_with_errors input[type=email],
 .form .field_with_errors input[type=password]{
     border: 1px solid #f74e1e;
+
 }
 .form .label {
     padding-bottom: 2px;
