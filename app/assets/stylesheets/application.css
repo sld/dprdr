@@ -340,6 +340,30 @@ footer.section .row .column5 {
     border-radius: 5px;
     border: 1px solid #b2e7ff;
 }
+.form input[type=file] {
+    width: 100%;
+}
+.form.upload .value{
+    padding-top: 15px;
+}
+.form.upload .btn {
+    margin: 0;
+}
+.form.upload .btn-upload {
+    text-align: right;
+}
+.form.upload .btn-upload span {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+}
+.form.upload .fileinput-button {
+    width: 100%;
+    margin: 20px 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 .label .field_with_errors  {
     color: #f74e1e;
 }

@@ -1,25 +1,25 @@
-<h1>Upload book</h1>
+<div class="row ">
+    <div class="column1 margin2"></div>
+    <div class="column6 margin3">
+        <div class="section form upload white shadow rc">
+<h2>Upload book</h2>
 <%= form_for @book, :html => {:multipart => true} do |f| %>
     <% if @book.errors.present? %>
         <%= @book.errors.full_messages.each do |msg| %>
             <p xmlns="http://www.w3.org/1999/html"><%= msg %></p>
         <% end %>
     <% end %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    <br/>
-    <div class="fileupload-buttonbar">
-          <span class="btn btn-mini fileinput-button">
-            <i class="icon-plus"></i>
-            <%= f.file_field :bookfile, accept: 'application/pdf,image/vnd.djvu' %>
-          </span>
+    <div class="value">
+        <%= f.text_field :name, :placeholder => "Book name" %>
     </div>
-    <br/>
-    <p>
-    Maximum file size: <strong> 30 MB </strong>.
-    </p>
+    <span class="btn light-blue fileinput-button">
+    <%= f.file_field :bookfile, accept: 'application/pdf,image/vnd.djvu' %>
+    </span>
+            <div class="btn-upload">
+                <span>Maximum file size: <strong class="font-blue"> 30 MB</strong>.</span>
+                <%= f.submit "Upload", :class => "btn big blue rc" %>
+            </div>
 
-    <%= f.submit "Upload" %>
 <% end %>
 
 <script>
@@ -34,3 +34,6 @@
       })
   });
 </script>
+        </div>
+    </div>
+</div>
