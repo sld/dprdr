@@ -1,25 +1,22 @@
-<!--<div class="section shadow white rc">-->
-    <div class="row ">
-        <div class="column1 margin2"></div>
-        <div class="column6 margin3">
-            <div class="section form white shadow rc">
-                <h2>Sign up</h2>
-                <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-                <%= devise_error_messages! %>
-                <div class="value"><%= f.text_field :name, :placeholder => "Name" %></div>
-                <div class="value"><%= f.email_field :email, :placeholder => "Email" %></div>
-                <div class="value"><%= f.password_field :password, :placeholder => "Password" %></div>
-                <div class="value"><%= f.password_field :password_confirmation, :placeholder => "Password confirmation" %></div>
+<div class="row ">
+    <div class="column1 margin2"></div>
+    <div class="column6 margin3">
+        <div class="section form white shadow rc">
+            <h2>Sign up</h2>
+            <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+            <div class="value"><%= f.text_field :name, :placeholder => "Name" %></div>
+            <div class="value"><%= f.email_field :email, :placeholder => "Email" %></div>
+            <div class="value"><%= f.password_field :password, :placeholder => "Password" %></div>
+            <div class="value"><%= f.password_field :password_confirmation, :placeholder => "Password confirmation" %></div>
 
-                <div class="button"><%= f.submit "Create an account", :class => "btn big yellow rc" %></div>
-                <% end %>
-                <h3>Login</h3>
-                <div class="share-links">
-                    <%= render "devise/shared/links" %>
-                </div>
-
+            <div class="button"><%= f.submit "Create an account", :class => "btn big yellow rc" %></div>
+            <% end %>
+            <h3>Login</h3>
+            <div class="share-links">
+                <%= render "devise/shared/links" %>
             </div>
+
         </div>
     </div>
-
-    <!--</div>-->
+</div>
