@@ -56,7 +56,7 @@ class Book < ActiveRecord::Base
       self.bookcover = File.open(to_delete_filepath)
 
       save!
-      #File.delete to_delete_filepath
+      File.delete to_delete_filepath
     end
   end
 
