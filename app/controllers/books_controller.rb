@@ -17,10 +17,10 @@ class BooksController < ApplicationController
     @book.user_id = current_user.id
 
     if @book.save
-      flash[:success] = "Book successfully added"
+      flash[:notice] = "Book successfully added"
       redirect_to action: :index
     else
-      flash[:notice] = "Error on adding book"
+      flash[:alert] = "Error on adding book"
       render action: :new
     end
   end
@@ -29,9 +29,9 @@ class BooksController < ApplicationController
   def destroy
     book = Book.find params[:id]
     if !book.djvu_state?(:processing) && book.destroy
-      flash[:success] = "Book successfully destroyed"
+      flash[:notice] = "Book successfully destroyed"
     else
-      flash[:notice] = "Error on deleting book"
+      flash[:alert] = "Error on deleting book"
     end
     redirect_to action: :index
   end
