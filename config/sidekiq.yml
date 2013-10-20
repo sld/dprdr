@@ -1,0 +1,6 @@
+---
+:verbose: false
+:concurrency: 3
+:pidfile: tmp/pids/sidekiq.pid
+:queues:
+  - ['long', 5]

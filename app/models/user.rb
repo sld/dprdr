@@ -5,27 +5,34 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  devise :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :is_guest
+  attr_accessible :provider, :uid
 
 
   has_many :books
 
-  validate :max_books_count_validate
 
   before_create :set_default_book
 
 
-  protected
-
-
-  def max_books_count_validate
-    max_books_count = 5
-    if books.count > max_books_count
-      errors.add(:books, "Books count can not be greater than #{max_books_count}")
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    unless user
+      user = User.create(name:auth.extra.raw_info.name,
+                           provider:auth.provider,
+                           uid:auth.uid,
+                           email:auth.info.email,
+                           password:Devise.friendly_token[0,20]
+                           )
     end
+    user
   end
+
+
+  protected
 
 
   def set_default_book
