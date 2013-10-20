@@ -35,9 +35,6 @@ ul {
 .nav {
     list-style: none;
 }
-header.section {
-    margin-top: 20px;
-}
 header.section,
 footer.section {
     padding: 10px 20px;
@@ -76,7 +73,6 @@ footer.section {
     vertical-align: top;
     padding-left: 10px;
 }
-
 .item-text {
     font-size: 16px;
     padding:10px 13px;
