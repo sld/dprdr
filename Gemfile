@@ -24,6 +24,8 @@ gem 'state_machine'
 
 gem 'sidekiq'
 
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :assets, :production do
   gem 'uglifier', '>= 1.0.3'
