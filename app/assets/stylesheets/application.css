@@ -198,6 +198,9 @@ footer.section .row .column5 {
     float: left;
     margin-left: -12px;
 }
+.book {
+    font-size: 18px;
+}
 .book .limit {
     height: 40px;
     line-height: 42px;
@@ -248,7 +251,11 @@ footer.section .row .column5 {
 }
 .book-item .title {
     font-size: 20px;
+    display: block;
     padding-bottom: 20px;
+}
+.book-item .title:hover {
+    text-decoration: none;
 }
 .book-item-list .li {
     padding: 3px 0;

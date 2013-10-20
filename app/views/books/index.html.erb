@@ -1,27 +1,30 @@
-<div class="section shadow white rc">
+<div class="section book shadow white rc">
 <!--<h2>My Books</h2>-->
 <% if current_user %>
-    <div class="row book">
+    <div class="row ">
         <div class="column6 limit"><span class="icon-archive font-green"></span> Books limit: <%= current_user.books.count %> / <%= Book::MAX_BOOKS_COUNT %></div>
         <div class="column6 text-right">
             <%= link_to( "<span class='genericon genericon-cloud-upload'></span>Upload book".html_safe, new_book_path, :class => 'btn big blue rc' ) %>
         </div>
     </div>
+<% elsif is_guest? %>
+    Guest can read only this PDF. Access Uploading and other Features by &nbsp;&nbsp;<%= link_to( "<span class='genericon genericon-facebook-alt'></span>Sign in with facebook".html_safe, new_user_session_path, :class => 'btn dark-blue rc' ) %>&nbsp;&nbsp; or &nbsp;&nbsp;<%= link_to( "<span class='genericon genericon-key'></span>Sign up".html_safe, new_user_registration_path, :class => 'btn yellow rc' ) %>
 <% end %>
+
 </div>
 
 <div class="row">
     <% @books.each do |book| %>
     <div class="column6">
         <div class="section book-item shadow white rc">
-            <div class="title">
-                <% if book.name.length > 38%>
-                    <%= book.name[0...38] %>...
+            <a href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%> class="title" title=<%= book.name %>>
+                <% if book.name.length > 37%>
+                    <%= book.name[0...37] %>...
                 <% else %>
                     <%= book.name %>
                 <% end %>
 
-            </div>
+            </a>
             <div class="row">
                 <div class="column6">
                     <% if book.bookcover? %>

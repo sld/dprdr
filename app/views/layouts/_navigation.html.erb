@@ -14,11 +14,13 @@
         Welcome, <strong>Guest</strong> &nbsp;&nbsp;
         <%= link_to( "<span class='genericon genericon-book'></span>My Books".html_safe, books_path, :class => 'btn green rc' ) %>
         <%= link_to( "<span class='genericon genericon-user'></span>Sign in".html_safe, new_user_session_path, :class => 'btn blue rc' ) %>
+        <%= link_to( "<span class='genericon genericon-user'></span>Log out".html_safe, destroy_user_session_path, :method=>'delete', :class => 'btn grey rc' ) %>
     </li>
   <% else %>
     <li>
         <%= link_to( "<span class='genericon genericon-reply'></span>Try It Now!".html_safe, try_as_guest_books_path, :class => 'btn red rc' ) %>
         <%= link_to( "<span class='genericon genericon-user'></span>Sign in".html_safe, new_user_session_path, :class => 'btn blue rc' ) %>
+        <!--<%= link_to( "<span class='genericon genericon-facebook-alt'></span>Sign in".html_safe, new_user_session_path, :class => 'btn dark-blue rc' ) %>-->
     </li>
   <% end %>
 </ul>
