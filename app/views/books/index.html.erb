@@ -27,7 +27,7 @@
         <li>Djvu processing status - <%= book.djvu_state %></li>
       <% end %>
       <% if current_user && !book.djvu_state?(:processing) %>
-        <%= link_to "Delete book", book_path(book), :method => :delete %>
+        <%= link_to "Delete book", book_path(book), :method => :delete, :confirm => "Are you sure for delete book?" %>
       <% end %>
     </ul>
 <% end %>
