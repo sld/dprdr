@@ -1,2 +1,27 @@
-<h1>DPReader</h1>
-<p>Mockup</p>
+<div class="row">
+    <div class="column4 item">
+        <div class="section shadow white rc">
+            <div class="item-title"><span class="genericon font-blue icon-upload-cloud"></span>Upload</div>
+            <div class="item-text">Upload your favorite <strong class="djvu">djvu</strong> or <strong class="pdf">pdf</strong>  books</div>
+        </div>
+    </div>
+    <div class="column4 item">
+        <div class="section shadow white rc">
+            <div class="item-title"><span class="genericon font-green icon-laptop"></span>Access</div>
+            <div class="item-text">Read your books in any device with browser</div>
+        </div>
+    </div>
+    <div class="column4 item">
+        <div class="section shadow white rc">
+            <div class="item-title"><span class="genericon font-red icon-book-open"></span>Reading</div>
+            <div class="item-text">Our service always remembers the page where you stop reading</div>
+        </div>
+    </div>
+</div>
+<div class="section shadow try white rc">
+    Please
+    <%= link_to( "<span class='genericon genericon-reply'></span>Try It Now!".html_safe, try_as_guest_books_path, :class => 'btn big red rc' ) %>
+    or
+    <%= link_to( "<span class='genericon genericon-key'></span>Sign up".html_safe, new_user_registration_path, :class => 'btn big yellow rc' ) %>
+    and get access to all features
+</div>
