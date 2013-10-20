@@ -3,6 +3,7 @@
 
 <% if current_user %>
     <%= link_to "Upload book", new_book_path %>
+    <p>Limit: <%= current_user.books.count %> / <%= Book::MAX_BOOKS_COUNT %> </p>
 <% end %>
 
 <% @books.each do |book| %>
@@ -24,6 +25,9 @@
       <li>Format - <%= book.bookfile.file.extension %></li>
       <% if book.djvu_state %>
         <li>Djvu processing status - <%= book.djvu_state %></li>
+      <% end %>
+      <% if current_user && !book.djvu_state?(:processing) %>
+        <%= link_to "Delete book", book_path(book), :method => :delete %>
       <% end %>
     </ul>
 <% end %>

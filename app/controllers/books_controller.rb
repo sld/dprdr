@@ -26,6 +26,17 @@ class BooksController < ApplicationController
   end
 
 
+  def destroy
+    book = Book.find params[:id]
+    if !book.djvu_state?(:processing) && book.destroy
+      flash[:success] = "Book successfully destroyed"
+    else
+      flash[:notice] = "Error on deleting book"
+    end
+    redirect_to action: :index
+  end
+
+
   def try_as_guest
     guest_user
     redirect_to action: :index

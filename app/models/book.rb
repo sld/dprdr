@@ -1,4 +1,6 @@
 class Book < ActiveRecord::Base
+  MAX_BOOKS_COUNT = 7
+
   attr_accessible :bookcover, :bookfile, :good_name, :last_access, :name, :page, :pages_count, :user_id
 
   belongs_to :user
@@ -8,7 +10,7 @@ class Book < ActiveRecord::Base
   mount_uploader :bookcover, BookcoverUploader
 
   validate :validate_file_size
-  validate :max_books_count_validate
+  validate :max_books_count_validate, :on => :create
 
 
   before_create :set_name, :set_page
@@ -59,6 +61,13 @@ class Book < ActiveRecord::Base
   end
 
 
+  def pdf_file
+    return bookfile if bookfile.file.try(:extension) == 'pdf'
+    return bookfile_pdf if bookfile_pdf.file.try(:extension) == 'pdf'
+    return nil
+  end
+
+
   private
 
 
@@ -67,13 +76,6 @@ class Book < ActiveRecord::Base
       self.enqueue!
       DjvuToPdfWorker.perform_async(self.id)   #TODO: move to after transition
     end
-  end
-
-
-  def pdf_file
-    return bookfile if bookfile.file.try(:extension) == 'pdf'
-    return bookfile_pdf if bookfile_pdf.file.try(:extension) == 'pdf'
-    return nil
   end
 
 
@@ -98,8 +100,8 @@ class Book < ActiveRecord::Base
 
 
   def max_books_count_validate
-    max_books_count = 5
-    if self.user && self.user.books.count > max_books_count
+    max_books_count = MAX_BOOKS_COUNT
+    if self.user && self.user.books.count >= max_books_count
       errors.add(:books, "Books count can not be greater than #{max_books_count}")
     end
   end

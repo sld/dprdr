@@ -17,6 +17,7 @@ class DjvuToPdfWorker
     book.finish_process!
 
     book.set_pages_count_and_cover
+    system("rm #{pdf_file}")
 
   rescue
     book.djvu_state = :error
