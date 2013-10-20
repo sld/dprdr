@@ -95,7 +95,7 @@ class Book < ActiveRecord::Base
 
 
   def validate_file_size
-    max_allowed_filesize = 20.0
+    max_allowed_filesize = 30.0
     if self.bookfile.file.size.to_f/(1000*1000) > max_allowed_filesize
       errors.add(:bookfile, "You cannot upload a file greater than #{max_allowed_filesize}MB")
     end
