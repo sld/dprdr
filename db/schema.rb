@@ -16,16 +16,16 @@ ActiveRecord::Schema.define(:version => 20131020054107) do
   create_table "books", :force => true do |t|
     t.string   "name"
     t.string   "good_name"
-    t.integer  "page"
+    t.integer  "page",         :default => 1
     t.datetime "last_access"
     t.string   "bookfile"
     t.string   "bookcover"
     t.integer  "user_id"
     t.integer  "pages_count"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.string   "bookfile_pdf"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.string   "djvu_state"
+    t.string   "bookfile_pdf"
   end
 
   add_index "books", ["name"], :name => "index_books_on_name"
