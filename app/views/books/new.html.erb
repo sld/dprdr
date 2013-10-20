@@ -1,3 +1,4 @@
+<h1>Upload book</h1>
 <%= form_for @book, :html => {:multipart => true} do |f| %>
     <% if @book.errors.present? %>
         <%= @book.errors.full_messages.each do |msg| %>

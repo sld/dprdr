@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
 
   def set_default_book
     book = self.books.build
+    book.name = "[Guest Book] Dostoyevsky, Notes from the Underground."
     book.bookfile = File.open("#{Rails.root}/public/Notes_from_the_Underground_NT.pdf")
     book.save!
   end
