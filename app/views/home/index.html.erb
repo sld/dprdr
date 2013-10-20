@@ -20,7 +20,7 @@
 </div>
 <div class="section shadow try white rc">
     <% if signed_in? %>
-    Please <%= link_to( "<span class='genericon genericon-cloud-upload'></span>Upload".html_safe, new_book_path, :class => 'btn big blue rc' ) %> and <%= link_to( "<span class='genericon genericon-book'></span>Read".html_safe, books_path, :class => 'btn green big rc' ) %> Your books
+    <%= link_to( "<span class='genericon genericon-cloud-upload'></span>Upload".html_safe, new_book_path, :class => 'btn big blue rc' ) %> and <%= link_to( "<span class='genericon genericon-book'></span>Read".html_safe, books_path, :class => 'btn green big rc' ) %> your books
     <% elsif is_guest? %>
     Guest, to access all features, <%= link_to( "<span class='genericon genericon-facebook-alt'></span>Sign in with facebook".html_safe, user_omniauth_authorize_path(:facebook), :class => 'btn dark-blue big rc' ) %> or <%= link_to( "<span class='genericon genericon-key'></span>Sign up".html_safe, new_user_registration_path, :class => 'btn yellow big rc' ) %>
     <% else %>
