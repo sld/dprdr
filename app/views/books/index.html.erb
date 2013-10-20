@@ -8,7 +8,7 @@
         </div>
     </div>
 <% elsif is_guest? %>
-    Guest can read only this PDF. Access Uploading and other Features by &nbsp;&nbsp;<%= link_to( "<span class='genericon genericon-facebook-alt'></span>Sign in with facebook".html_safe, user_omniauth_authorize_path(:facebook), :class => 'btn dark-blue rc' ) %>&nbsp;&nbsp; or &nbsp;&nbsp;<%= link_to( "<span class='genericon genericon-key'></span>Sign up".html_safe, new_user_registration_path, :class => 'btn yellow rc' ) %>
+    Guest can read only this PDF. Access Uploading and other features by &nbsp;&nbsp;<%= link_to( "<span class='genericon genericon-facebook-alt'></span>Sign in with facebook".html_safe, user_omniauth_authorize_path(:facebook), :class => 'btn dark-blue rc' ) %>&nbsp;&nbsp; or &nbsp;&nbsp;<%= link_to( "<span class='genericon genericon-key'></span>Sign up".html_safe, new_user_registration_path, :class => 'btn yellow rc' ) %>
 <% end %>
 
 </div>
