@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   has_many :books
 
+  validates_presence_of :name
+
 
   before_create :set_default_books
 
