@@ -1,0 +1,5 @@
+---
+:verbose: false
+:concurrency: 3
+:queues:
+  - ['long', 5]
