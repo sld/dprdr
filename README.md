@@ -3,6 +3,8 @@ Dpreader @ RailsRumble 2013
 
 Your pdf and djvu in cloud.
 
+Site: http://dpreader.r13.railsrumble.com/
+
 ________________________
 
 # License
