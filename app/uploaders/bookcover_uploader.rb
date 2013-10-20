@@ -1,7 +1,7 @@
 class BookcoverUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
-  process :resize_to_fit => [150, 230]
+  process :resize_to_fit => [150, 200]
 
 
   storage :file
@@ -13,7 +13,7 @@ class BookcoverUploader < CarrierWave::Uploader::Base
 
 
   def extension_white_list
-     %w(png)
+     %w(png jpg)
   end
 
 

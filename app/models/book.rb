@@ -13,7 +13,7 @@ class Book < ActiveRecord::Base
   validate :max_books_count_validate, :on => :create
 
 
-  before_create :set_name, :set_page
+  before_create :set_name, :set_page, :set_cover
   after_create :set_pages_count_and_cover
 
 
@@ -85,14 +85,17 @@ class Book < ActiveRecord::Base
     end
   end
 
-
   def set_page
     self.page = 1 unless self.page
   end
 
+  def set_cover
+    self.bookcover ||= File.open("#{Rails.root}/public/bookcover.jpg")
+  end
+
 
   def validate_file_size
-    max_allowed_filesize = 20.0
+    max_allowed_filesize = 30.0
     if self.bookfile.file.size.to_f/(1000*1000) > max_allowed_filesize
       errors.add(:bookfile, "You cannot upload a file greater than #{max_allowed_filesize}MB")
     end

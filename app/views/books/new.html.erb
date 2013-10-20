@@ -1,13 +1,35 @@
 <%= form_for @book, :html => {:multipart => true} do |f| %>
     <% if @book.errors.present? %>
         <%= @book.errors.full_messages.each do |msg| %>
-          <p><%= msg %></p>
+            <p xmlns="http://www.w3.org/1999/html"><%= msg %></p>
         <% end %>
     <% end %>
     <%= f.label :name %>
     <%= f.text_field :name %>
     <br/>
-    <%= f.file_field :bookfile %>
+    <div class="fileupload-buttonbar">
+          <span class="btn btn-mini fileinput-button">
+            <i class="icon-plus"></i>
+            <%= f.file_field :bookfile, accept: 'application/pdf,image/vnd.djvu' %>
+          </span>
+    </div>
     <br/>
+    <p>
+    Maximum file size: <strong> 30 MB </strong>.
+    </p>
+
     <%= f.submit "Upload" %>
 <% end %>
+
+<script>
+  $(function () {
+      $("#book_bookfile").change(function(){
+          var fileSize = $("#book_bookfile")[0].files[0].size; //size in kb
+          var fileSize = fileSize / 1048576; //size in mb
+          if ( fileSize > 30 )
+          {
+              alert("Your file size more than 30 MB. Server can not accept file with size > 30 MB.")
+          }
+      })
+  });
+</script>
