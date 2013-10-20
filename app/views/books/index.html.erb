@@ -4,6 +4,10 @@
 <% if current_user %>
     <%= link_to "Upload book", new_book_path %>
     <p>Limit: <%= current_user.books.count %> / <%= Book::MAX_BOOKS_COUNT %> </p>
+<% else %>
+    <% text_for_guest = "Access Uploading and other Features by <a href='/users/auth/facebook'>signing in via facebook</a>
+    or <a href='/users/sign_up'>registering</a>." %>
+    <%= link_to "Upload book", '#', :id => 'not_for_guest', :title => text_for_guest %>
 <% end %>
 
 <% @books.each do |book| %>
@@ -31,3 +35,9 @@
       <% end %>
     </ul>
 <% end %>
+
+<script>
+  $(function(){
+     $("#not_for_guest").balloon({ position: "top", offsetX: 100 });
+  })
+</script>
