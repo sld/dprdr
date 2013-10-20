@@ -8,6 +8,7 @@ class Book < ActiveRecord::Base
   mount_uploader :bookcover, BookcoverUploader
 
   validate :validate_file_size
+  validate :max_books_count_validate
 
 
   before_create :set_name, :set_page
@@ -25,6 +26,10 @@ class Book < ActiveRecord::Base
 
   # Only if book not if PDF
   state_machine :djvu_state do
+    event :enqueue do
+      transition nil => :queued
+    end
+
     event :process do
       transition :queued => :processing
     end
@@ -32,6 +37,8 @@ class Book < ActiveRecord::Base
     event :finish_process do
       transition :processing => :finished
     end
+
+    state :error
   end
 
   def set_pages_count_and_cover
@@ -57,18 +64,8 @@ class Book < ActiveRecord::Base
 
   def check_is_only_djvu
     if bookfile.file.extension == 'djvu' && bookfile_pdf.file.nil?
-      self.djvu_state = :queued
-      self.save
-
-      DjvuToPdfWorker.perform_async(self.id)
-    end
-  end
-
-
-  def validate_file_size
-    max_allowed_filesize = 20.0
-    if bookfile.file.size.to_f/(1000*1000) > max_allowed_filesize
-      errors.add(:bookfile, "You cannot upload a file greater than #{max_allowed_filesize}MB")
+      self.enqueue!
+      DjvuToPdfWorker.perform_async(self.id)   #TODO: move to after transition
     end
   end
 
@@ -89,6 +86,22 @@ class Book < ActiveRecord::Base
 
   def set_page
     self.page = 1 unless self.page
+  end
+
+
+  def validate_file_size
+    max_allowed_filesize = 20.0
+    if self.bookfile.file.size.to_f/(1000*1000) > max_allowed_filesize
+      errors.add(:bookfile, "You cannot upload a file greater than #{max_allowed_filesize}MB")
+    end
+  end
+
+
+  def max_books_count_validate
+    max_books_count = 5
+    if self.user && self.user.books.count > max_books_count
+      errors.add(:books, "Books count can not be greater than #{max_books_count}")
+    end
   end
 
 end

@@ -12,7 +12,7 @@
     <% end %>
     <ul>
       <% if book.djvu_state && !book.djvu_state?(:finished) %>
-        <li>Wait until your djvu will be processed. It takes 1 - 5 minutes.</li>
+        <li>Wait until your djvu will be process. It takes 5 - 15 minutes.</li>
       <% else %>
         <li><a href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%>> Read now </a></li>
       <% end %>
@@ -22,6 +22,8 @@
       <% end %>
       <li>Last Read - <%= book.last_access || "Not Read Yet" %></li>
       <li>Format - <%= book.bookfile.file.extension %></li>
-      <li>Djvu processing status - <%= book.djvu_state %></li>
+      <% if book.djvu_state %>
+        <li>Djvu processing status - <%= book.djvu_state %></li>
+      <% end %>
     </ul>
 <% end %>
