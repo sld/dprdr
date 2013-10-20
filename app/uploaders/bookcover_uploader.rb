@@ -1,7 +1,7 @@
 class BookcoverUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
-  process :resize_to_fit => [150, 220]
+  process :resize_to_fit => [150, 200]
 
 
   storage :file
