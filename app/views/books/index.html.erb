@@ -17,7 +17,11 @@
     <% @books.each do |book| %>
     <div class="column6">
         <div class="section book-item shadow white rc">
+<<<<<<< HEAD
             <a href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%> class="title" title="<%= book.name %>">
+=======
+            <a href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%> class="title" title="<%= book.name %>" >
+>>>>>>> origin/master
                 <% if book.name.length > 37%>
                     <%= book.name[0...37] %>...
                 <% else %>
