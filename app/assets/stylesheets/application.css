@@ -1,37 +1,153 @@
+@import "awibox-UI.css";
+
+body {
+    background: #b2e7ff url(../design/images/bg.png);
+}
+.nav {
+    list-style: none;
+}
+header.section,
+footer.section {
+    padding: 10px 20px;
+}
+.authorization {
+    height: 70px;
+    line-height: 70px;
+    font-size: 16px;
+}
+.section {
+    background: rgba(255,255,255,0.8);
+}
+.authorization {
+    text-align: right;
+}
+.authorization .btn{
+    margin: 0 5px;
+}
+.item-title {
+    font-size: 36px;
+    height: 64px;
+    line-height: 64px;
+}
+.item .section {
+    padding: 10px 20px;
+}
+.item-title .genericon{
+    font-size: 64px;
+    height: 64px;
+    width: 94px;
+    margin-right: 10px;
+}
+.item-text {
+    font-size: 16px;
+    padding:10px 13px;
+    min-height: 40px;
+}
+.djvu {
+    color: #7551a9;
+}
+.pdf {
+    color: #d12308;
+}
+.section.try {
+    text-align: center;
+    padding: 15px 20px;
+
+}
+.try .btn {
+    margin: 0 10px;
+}
+footer.section .row [class*="column"]{
+    min-height: 10px;
+    height: 20px;
+}
+footer.section .row .column5 {
+    text-align: right;
+}
+@font-face {
+    font-family: 'fontello';
+    src: url('/design/font/fontello.eot?81528031');
+    src: url('/design/font/fontello.eot?81528031#iefix') format('embedded-opentype'),
+    url('/design/font/fontello.woff?81528031') format('woff'),
+    url('/design/font/fontello.ttf?81528031') format('truetype'),
+    url('/design/font/fontello.svg?81528031#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
- *= require normalize
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?74587836#fontello') format('svg');
+  }
+}
 */
-.brand {
-  float: left;
-  padding-right: 8px;
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    margin-left: .2em;
+
+    /* you can be more comfortable with increased icons size */
+    /* font-size: 120%; */
+
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
-ul.nav {
-  list-style: none;
-  margin: 0 0 2em;
-  padding: 0;
+
+.icon-upload-cloud:before { content: '\e800'; } /* '' */
+.icon-desktop:before { content: '\e804'; } /* '' */
+.icon-laptop:before { content: '\e802'; } /* '' */
+.icon-tablet:before { content: '\e803'; } /* '' */
+.icon-book:before { content: '\e801'; } /* '' */
+.icon-book-open:before { content: '\e808'; } /* '' */
+.icon-book-1:before { content: '\e805'; } /* '' */
+.icon-book-alt:before { content: '\e809'; } /* '' */
+.icon-appstore:before { content: '\e806'; } /* '' */
+.logo:after {
+    content: "";
+    display: block;
+    clear: both;
 }
-ul.nav li {
-  display: inline;
+.logo a {
+    float: left;
+    color: #000;
+    text-decoration: none;
+
 }
-#flash_notice, #flash_alert {
-  padding: 5px 8px;
-  margin: 10px 0;
+.logo .name {
+    font-size: 42px;
+    line-height: 43px;
 }
-#flash_notice {
-  background-color: #CFC;
-  border: solid 1px #6C6;
+.logo .slogan {
+    font-size: 16px;
+    display: block;
+    margin-left: 3px;
 }
-#flash_alert {
-  background-color: #FCC;
-  border: solid 1px #C66;
+.logo .icon-book {
+    font-size: 64px;
+    height: 64px;
+    float: left;
+    margin-left: -12px;
 }
