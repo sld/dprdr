@@ -5,7 +5,7 @@
   <% end %>
   <% if signed_in? %>
     <li>
-        Welcome, <strong>Andrey</strong>: &nbsp;&nbsp;
+        Welcome, <strong><%= current_user.name || "User" %></strong>: &nbsp;&nbsp;
         <%= link_to( "<span class='genericon genericon-book'></span>My Books".html_safe, books_path, :class => 'btn green rc' ) %>
         <%= link_to( "<span class='genericon genericon-user'></span>Log out".html_safe, destroy_user_session_path, :method=>'delete', :class => 'btn grey rc' ) %>
     </li>
