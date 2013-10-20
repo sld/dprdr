@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :books
 
 
-  before_create :set_default_book
+  before_create :set_default_books
 
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
@@ -35,10 +35,15 @@ class User < ActiveRecord::Base
   protected
 
 
-  def set_default_book
+  def set_default_books
     book = self.books.build
-    book.name = "[Guest Book] Dostoyevsky, Notes from the Underground."
+    book.name = "[Guest Book] Dostoyevsky, Notes from the Underground"
     book.bookfile = File.open("#{Rails.root}/public/Notes_from_the_Underground_NT.pdf")
+    book.save!
+
+    book = self.books.build
+    book.name = "[Guest Book] Data-Intensive Text Processing with MapReduce"
+    book.bookfile = File.open("#{Rails.root}/public/MapReduce-book-final.pdf")
     book.save!
   end
 
