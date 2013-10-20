@@ -29,8 +29,14 @@
 body {
     background: #b2e7ff url(../design/images/bg.png);
 }
+ul {
+    padding-left: 30px;
+}
 .nav {
     list-style: none;
+}
+header.section {
+    margin-top: 20px;
 }
 header.section,
 footer.section {
@@ -51,19 +57,26 @@ footer.section {
     margin: 0 5px;
 }
 .item-title {
-    font-size: 36px;
-    height: 64px;
-    line-height: 64px;
+
 }
 .item .section {
     padding: 10px 20px;
 }
-.item-title .genericon{
+.item-title span[class^="icon-"],
+.item-title span[class*=" icon-"]{
     font-size: 64px;
-    height: 64px;
-    width: 94px;
-    margin-right: 10px;
+    display: inline-block;
+    vertical-align: top;
 }
+.item-title-text {
+    font-size: 36px;
+    height: 64px;
+    line-height: 64px;
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 10px;
+}
+
 .item-text {
     font-size: 16px;
     padding:10px 13px;
@@ -174,6 +187,7 @@ footer.section .row .column5 {
 .logo .icon-book {
     font-size: 64px;
     height: 64px;
+    width: auto;
     float: left;
     margin-left: -12px;
 }
