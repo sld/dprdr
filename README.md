@@ -1,4 +1,4 @@
-Dpreader @ RailsRumble 2013
+DPReader @ RailsRumble 2013
 ========================
 
 Your pdf and djvu in a cloud.
