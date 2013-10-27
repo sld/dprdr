@@ -42,16 +42,19 @@ class DjvuToPdfWorker
 
 
   def convert_tiff_to_pdf(tiff_file)
-    pdf_file = Digest::MD5.hexdigest(tiff_file[0..-6]).to_s + "_tmp.pdf"
+    hex_digest = Digest::MD5.hexdigest(tiff_file[0..-6])
+    pdf_file = "#{hex_digest}_tmp.pdf"
     output = "#{Rails.root}/public/uploads/#{pdf_file}"
-    command = "jbig2 -p -s #{tiff_file} && pdf.py output > #{output}"
+
+    basename = "output-#{rand(1337)}-#{hex_digest}}"
+    command = "jbig2 -b #{basename} -p -s #{tiff_file} && pdf.py #{basename} > #{output}"
     unless system(command)
       puts command
       msg = "Can not convert TIFF to PDF"
       Honeybadger.notify msg
       raise Exception.new(msg)
     end
-    system("rm output.*")
+    system("rm #{basename}.*")
     system("rm #{tiff_file}")
     return output
   end
