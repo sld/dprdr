@@ -15,8 +15,6 @@ class Book < ActiveRecord::Base
 
   before_create :set_name, :set_page, :set_cover
   after_create :set_pages_count_and_cover
-
-
   after_commit :check_is_only_djvu, :on => :create
 
 
