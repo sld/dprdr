@@ -11,21 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131020054107) do
+ActiveRecord::Schema.define(:version => 20131112162925) do
 
   create_table "books", :force => true do |t|
     t.string   "name"
     t.string   "good_name"
-    t.integer  "page",         :default => 1
+    t.integer  "page"
     t.datetime "last_access"
     t.string   "bookfile"
     t.string   "bookcover"
     t.integer  "user_id"
     t.integer  "pages_count"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.string   "djvu_state"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "bookfile_pdf"
+    t.string   "djvu_state"
   end
 
   add_index "books", ["name"], :name => "index_books_on_name"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20131020054107) do
     t.boolean  "is_guest"
     t.string   "provider"
     t.string   "uid"
+    t.string   "dropbox_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
