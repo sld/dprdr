@@ -9,6 +9,8 @@ gem 'figaro'
 gem 'pg'
 gem 'rolify'
 
+gem 'dropbox-sdk'
+
 gem 'jquery-rails'
 
 gem 'capistrano', '~> 2.15'
@@ -26,6 +28,8 @@ gem 'sidekiq'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-dropbox2'
+
 gem 'jquery-fileupload-rails'
 
 group :assets, :production do
