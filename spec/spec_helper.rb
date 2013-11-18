@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'email_spec'
 require 'mocha/setup'
 require 'rspec/autorun'
+require 'sidekiq/testing'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -39,6 +40,8 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  Sidekiq::Testing.fake!
   
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
