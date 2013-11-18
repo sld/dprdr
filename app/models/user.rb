@@ -50,6 +50,13 @@ class User < ActiveRecord::Base
   end
 
 
+  def make_book
+    book = books.build
+    book.save(validate: false)
+    book
+  end
+
+
   protected
 
 

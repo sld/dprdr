@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class BookfileUploader < CarrierWave::Uploader::Base
 
   CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
@@ -14,7 +12,7 @@ class BookfileUploader < CarrierWave::Uploader::Base
 
 
   def extension_white_list
-     %w(pdf djvu)
+     %w(pdf djvu epub fb2)
   end
 
 

@@ -11,6 +11,8 @@ class DropboxFile < ActiveRecord::Base
   belongs_to :book
   has_one :user, :through => :book
 
+  before_save :set_book_name
+
 
   def self.make_books_from_dropbox user_id, folder
     user = User.find(user_id)
@@ -38,6 +40,13 @@ class DropboxFile < ActiveRecord::Base
   protected
 
 
+  def set_book_name
+    unless book.name
+      book.update_column :name, path.split("/").last
+    end
+  end
+
+
   def dropbox_client
     @dropbox_client ||= DropboxClient.new user.dropbox_token
   end
@@ -49,7 +58,10 @@ class DropboxFile < ActiveRecord::Base
 
 
   def pdf_file_io
-    open( tmp_url )
+    unless temp_file_path && File.exist?(temp_file_path)
+      temp_file_path = open( tmp_url )
+    end
+    File.open(temp_file_path)
   end
 
 

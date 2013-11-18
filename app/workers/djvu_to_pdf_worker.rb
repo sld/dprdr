@@ -4,24 +4,25 @@ class DjvuToPdfWorker
   sidekiq_options :queue => :long, :retry => false, :backtrace => true
 
 
-  def perform(book_id)
-    book = Book.find(book_id)
+  def perform(local_file_id)
+    local_file = LocalFile.find local_file_id
 
-    book.process! if book.djvu_state?(:queued)
+    local_file.process! if local_file.djvu_state?(:queued)
 
-    djvu_file = book.bookfile.file.file
+    djvu_file = local_file.book_djvu.file.file
     tiff_file = convert_djvu_to_tiff(djvu_file)
     pdf_file = convert_tiff_to_pdf(tiff_file)
-    book.bookfile_pdf = File.open(pdf_file)
-    book.save(validate: false)
-    book.finish_process!
+    local_file.book_pdf = File.open(pdf_file)
+    local_file.save!
+    local_file.finish_process!
 
-    book.set_pages_count_and_cover
+    local_file.send :set_book_pages_count
+    local_file.send :set_book_cover
     system("rm #{pdf_file}")
 
   rescue
-    book.djvu_state = :error
-    book.save
+    local_file.djvu_state = :error
+    local_file.save
   end
 
 
