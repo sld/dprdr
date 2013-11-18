@@ -7,6 +7,7 @@ class CreateDropboxFiles < ActiveRecord::Migration
       t.string :path
       t.string :mime_type
       t.integer :book_id
+      t.string :temp_file_path
 
       t.timestamps
     end

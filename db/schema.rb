@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131112162925) do
+ActiveRecord::Schema.define(:version => 20131118203350) do
 
   create_table "books", :force => true do |t|
     t.string   "name"
@@ -25,11 +25,33 @@ ActiveRecord::Schema.define(:version => 20131112162925) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "bookfile_pdf"
-    t.string   "djvu_state"
   end
 
   add_index "books", ["name"], :name => "index_books_on_name"
   add_index "books", ["user_id"], :name => "index_books_on_user_id"
+
+  create_table "dropbox_files", :force => true do |t|
+    t.datetime "modified"
+    t.string   "size"
+    t.integer  "revision"
+    t.string   "path"
+    t.string   "mime_type"
+    t.integer  "book_id"
+    t.string   "temp_file_path"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "local_files", :force => true do |t|
+    t.integer  "book_id"
+    t.string   "book_pdf"
+    t.string   "book_djvu"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "djvu_state"
+  end
+
+  add_index "local_files", ["book_id"], :name => "index_local_files_on_book_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
