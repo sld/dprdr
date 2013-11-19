@@ -13,7 +13,10 @@ class BooksController < ApplicationController
 
 
   def create
-    @book = Book.new params[:book]
+    @book = current_user.make_book
+
+    @book.name = params[:book][:name]
+    @book.bookfile = params[:book][:bookfile]
     @book.user_id = current_user.id
 
     if @book.save
@@ -22,6 +25,7 @@ class BooksController < ApplicationController
     else
       flash[:alert] = "Error on adding book"
       render action: :new
+      @book.delete
     end
   end
 
@@ -47,7 +51,7 @@ class BooksController < ApplicationController
     @book = Book.find params[:id]
     raise CanCan::AccessDenied.new("Can not read book! Is this yours?", :read, @book) unless current_or_guest_user.books.include?(@book)
     @book.update_column :last_access, Time.now
-    @bookfile_url = (@book.bookfile.file.extension == 'pdf' ? @book.bookfile.url : @book.bookfile_pdf.url)
+    @bookfile_url = @book.url
     render :layout => false
   end
 end
