@@ -23,8 +23,10 @@
                 <% else %>
                     <%= book.name %>
                 <% end %>
-
             </a>
+            <% if book.dropbox_file %>
+                <p style="color:blue"> <%= Dropbox %> </p>
+            <% end %>
             <div class="row">
                 <div class="column6">
                     <% if book.bookcover? %>
@@ -36,7 +38,7 @@
                 <div class="column6">
                     <div class="book-item-list">
                         <div class="li">Book format:
-                            <% if book.bookfile.file.extension == "pdf" %>
+                            <% if book.bookfile.extension.to_sym == :pdf %>
                             <strong class="pdf">pdf</strong>
                             <% else %>
                             <strong class="djvu">djvu</strong>
