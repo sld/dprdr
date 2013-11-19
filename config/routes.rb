@@ -13,6 +13,11 @@ Dpreader::Application.routes.draw do
     end
   end
 
+  namespace :dropbox do
+    get 'folder_select' => 'dropbox#folder_select'
+    post 'link_data' => 'dropbox#link_data'
+  end
+
 
   # Api section
   namespace :api do
