@@ -2,7 +2,8 @@ require 'dropbox_sdk'
 require 'open-uri'
 
 class DropboxFile < ActiveRecord::Base
-  FORMATS = ['djvu', 'pdf', 'epub', 'fb2']
+  #FORMATS = ['djvu', 'pdf', 'epub', 'fb2']
+  FORMATS = ['pdf']
 
   attr_accessible :path
 
@@ -19,20 +20,10 @@ class DropboxFile < ActiveRecord::Base
     dropbox_client = DropboxClient.new user.dropbox_token
 
     folder_metadata = dropbox_client.metadata(folder)
-    metadatas = all_files_in_dir_and_subs( folder_metadata )
+    metadatas = all_files_in_dir_and_subs( dropbox_client, folder_metadata )
     metadatas.each do |metadata|
-      book = user.books.build
-      book.save(validate: false)
-
-      dropbox_file = book.build_dropbox_file
-
-      dropbox_file.mime_type = metadata['mime_type']
-      dropbox_file.modified = Time.parse(metadata['modified'])
-      dropbox_file.path = metadata['path']
-      dropbox_file.revision = metadata['revision']
-      dropbox_file.size = metadata['size']
-
-      dropbox_file.save!
+      book = user.make_book
+      DropboxFileWorker.perform_async book.id, metadata
     end
   end
 
@@ -78,10 +69,10 @@ class DropboxFile < ActiveRecord::Base
 
 
   # Ищем все файлы с форматами FORMATS в папке, с глубиной вхождения максимум +max_rec+
-  def self.all_files_in_dir_and_subs folder_metadata, result=[], curr_rec = 0, max_rec = 4
+  def self.all_files_in_dir_and_subs dropbox_client, folder_metadata, result=[], curr_rec = 0, max_rec = 4
     folder_metadata["contents"].each do |file_metadata|
       if file_metadata["is_dir"] && curr_rec < max_rec
-        all_files_in_dir_and_subs @dropbox_client.metadata(file_metadata["path"]), result, curr_rec+1
+        all_files_in_dir_and_subs( dropbox_client, dropbox_client.metadata(file_metadata["path"]), result, curr_rec+1 )
       elsif FORMATS.include?(file_metadata["path"].split(".").last.downcase)
         result << file_metadata
       end
