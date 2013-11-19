@@ -1,6 +1,7 @@
 ---
 :verbose: false
-:concurrency: 3
+:concurrency: 5
 :pidfile: tmp/pids/sidekiq.pid
 :queues:
   - ['long', 5]
+  - ['medium', 15]
