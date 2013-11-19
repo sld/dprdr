@@ -11,20 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118203350) do
+ActiveRecord::Schema.define(:version => 20131118213914) do
 
   create_table "books", :force => true do |t|
     t.string   "name"
     t.string   "good_name"
     t.integer  "page"
     t.datetime "last_access"
-    t.string   "bookfile"
     t.string   "bookcover"
     t.integer  "user_id"
     t.integer  "pages_count"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.string   "bookfile_pdf"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "books", ["name"], :name => "index_books_on_name"

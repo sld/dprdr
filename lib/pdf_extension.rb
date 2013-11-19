@@ -5,7 +5,7 @@ module PdfExtension
   extend ActiveSupport::Concern
 
   included do
-    before_create :set_book_pages_count, :set_book_cover
+    after_create :set_book_pages_count, :set_book_cover
   end
 
 
