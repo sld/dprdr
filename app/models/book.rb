@@ -11,7 +11,7 @@ class Book < ActiveRecord::Base
   mount_uploader :bookcover, BookcoverUploader
 
 
-  validate :max_books_count_validate, :on => :create
+  validate :max_local_books_count, :on => :create
 
 
   before_save :set_default_page, :set_cover
@@ -45,7 +45,7 @@ class Book < ActiveRecord::Base
 
 
   def url
-    bookfile.url
+    return self.bookfile.url
   end
 
 
@@ -71,9 +71,9 @@ class Book < ActiveRecord::Base
   end
 
 
-  def max_books_count_validate
+  def max_local_books_count
     max_books_count = MAX_BOOKS_COUNT
-    if self.user && self.user.books.count >= max_books_count
+    if self.user && self.user.local_files.count >= max_books_count
       errors.add(:books, "Books count can not be greater than #{max_books_count}")
     end
   end

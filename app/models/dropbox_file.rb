@@ -39,8 +39,13 @@ class DropboxFile < ActiveRecord::Base
 
   def bookfile
     dropbox_metadata = dropbox_client.media(path)
-    keys = dropbox_metadata.keys
-    Struct.new(*keys).new(*keys.map { |k| dropbox_metadata[k] })
+    Bookfile.new( extension, { :expires => dropbox_metadata['expires'],
+                  :dropbox_client => dropbox_client, :dropbox_path => path } )
+  end
+
+
+  def extension
+    path.split('.').last
   end
 
 
@@ -55,7 +60,7 @@ class DropboxFile < ActiveRecord::Base
 
 
   def dropbox_client
-    @dropbox_client ||= DropboxClient.new user.dropbox_token
+    @dropbox_client = DropboxClient.new user.dropbox_token
   end
 
 

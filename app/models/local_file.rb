@@ -23,14 +23,13 @@ class LocalFile < ActiveRecord::Base
 
 
   # Все прикрепляемые файлы (DropboxFile, Localfile) должны иметь этот метод
-  #NOTE: Пока не учитываем .djvu
   def bookfile
     if book_pdf.file
-      return book_pdf
+      return Bookfile.new :pdf, :url => book_pdf.url
     end
 
     if book_djvu.file
-      return book_djvu
+      return Bookfile.new :djvu, :url => book_djvu.url
     end
   end
 

@@ -11,7 +11,10 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :is_guest
   attr_accessible :provider, :uid
 
+  attr_accessor :just_created
+
   has_many :books
+  has_many :local_files, :through => :books
 
   validates_presence_of :name
 
@@ -41,6 +44,7 @@ class User < ActiveRecord::Base
                            email:auth.extra.raw_info.email,
                            password:Devise.friendly_token[0,20]
                            )
+      user.just_created = true
     end
     user.update_column :dropbox_token, auth.credentials.token
 
