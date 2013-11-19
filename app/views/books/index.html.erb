@@ -18,7 +18,7 @@
     <div class="column6">
         <div class="section book-item shadow white rc">
             <a href=<%="/books/#{book.id}/viewer?#page=#{book.page}"%> class="title" title="<%= book.name %>" >
-                <% if book.name.length > 37%>
+                <% if book.name.try(:length).to_i > 37%>
                     <%= book.name[0...37] %>...
                 <% else %>
                     <%= book.name %>
@@ -38,11 +38,13 @@
                 <div class="column6">
                     <div class="book-item-list">
                         <div class="li">Book format:
-                            <% if book.bookfile.extension.to_sym == :pdf %>
-                            <strong class="pdf">pdf</strong>
-                            <% else %>
-                            <strong class="djvu">djvu</strong>
-                            <% end %>
+                            <% if book.bookfile %>
+                                <% if book.bookfile.extension.to_sym == :pdf %>
+                                <strong class="pdf">pdf</strong>
+                                <% else %>
+                                <strong class="djvu">djvu</strong>
+                                <% end %>
+                             <% end %>
                         </div>
 
                         <div class="li">Total pages: <strong class="font-blue"><%= book.pages_count %></strong></div>
