@@ -4,14 +4,14 @@ require 'open-uri'
 class DropboxFile < ActiveRecord::Base
   FORMATS = ['djvu', 'pdf', 'epub', 'fb2']
 
-  include PdfExtension
+  attr_accessible :path
 
-  attr_accessible :book_id, :mime_type, :modified, :path, :revision, :size
+  include PdfExtension
 
   belongs_to :book
   has_one :user, :through => :book
 
-  before_save :set_book_name
+  before_create :set_book_name
 
 
   def self.make_books_from_dropbox user_id, folder
@@ -34,6 +34,13 @@ class DropboxFile < ActiveRecord::Base
 
       dropbox_file.save!
     end
+  end
+
+
+  def bookfile
+    dropbox_metadata = dropbox_client.media(path)
+    keys = dropbox_metadata.keys
+    Struct.new(*keys).new(*keys.map { |k| dropbox_metadata[k] })
   end
 
 

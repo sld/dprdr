@@ -11,13 +11,11 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :is_guest
   attr_accessible :provider, :uid
 
-
   has_many :books
 
   validates_presence_of :name
 
-
-  before_create :set_default_books
+  before_create :set_default_books_if_guest
 
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
@@ -60,16 +58,18 @@ class User < ActiveRecord::Base
   protected
 
 
-  def set_default_books
-    book = self.books.build
-    book.name = "[Guest Book] Dostoyevsky, Notes from the Underground"
-    book.bookfile = File.open("#{Rails.root}/public/Notes_from_the_Underground_NT.pdf")
-    book.save!
+  def set_default_books_if_guest
+    if is_guest?
+      book = self.books.build
+      book.name = "[Guest Book] Dostoyevsky, Notes from the Underground"
+      book.bookfile = File.open("#{Rails.root}/public/Notes_from_the_Underground_NT.pdf")
+      book.save!
 
-    book = self.books.build
-    book.name = "[Guest Book] Data-Intensive Text Processing with MapReduce"
-    book.bookfile = File.open("#{Rails.root}/public/MapReduce-book-final.pdf")
-    book.save!
+      book = self.books.build
+      book.name = "[Guest Book] Data-Intensive Text Processing with MapReduce"
+      book.bookfile = File.open("#{Rails.root}/public/MapReduce-book-final.pdf")
+      book.save!
+    end
   end
 
 end
