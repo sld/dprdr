@@ -15,6 +15,7 @@ Dpreader::Application.routes.draw do
 
 
   get 'dropbox/folder_select' => 'dropbox#folder_select'
+  get 'dropbox/refresh_folder' => 'dropbox#refresh_folder'
   post 'dropbox/link_data' => 'dropbox#link_data'
 
 
