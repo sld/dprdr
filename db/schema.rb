@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131118213914) do
+ActiveRecord::Schema.define(:version => 20131120173119) do
 
   create_table "books", :force => true do |t|
     t.string   "name"
@@ -21,8 +21,9 @@ ActiveRecord::Schema.define(:version => 20131118213914) do
     t.string   "bookcover"
     t.integer  "user_id"
     t.integer  "pages_count"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.boolean  "dropbox_processing"
   end
 
   add_index "books", ["name"], :name => "index_books_on_name"
@@ -80,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20131118213914) do
     t.string   "provider"
     t.string   "uid"
     t.string   "dropbox_token"
+    t.string   "dropbox_folder"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
