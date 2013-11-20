@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   has_many :books
   has_many :local_files, :through => :books
+  has_many :dropbox_files, :through => :books
 
   validates_presence_of :name
 
@@ -53,9 +54,16 @@ class User < ActiveRecord::Base
 
 
   def make_book
-    book = books.build
-    book.save(validate: false)
-    book
+    ActiveRecord::Base.transaction do
+      book = books.build
+      book.save(validate: false)
+      book
+    end
+  end
+
+
+  def dropbox_user?
+    provider.to_sym == :dropbox
   end
 
 

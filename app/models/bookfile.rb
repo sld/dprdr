@@ -14,8 +14,21 @@ class Bookfile
 
   def url
     if @dropbox_client
-      @url = @dropbox_client.media(@dropbox_path)['url']
+      @url = dropbox_metadata['url']
     end
     @url
+  end
+
+
+  def expires
+    dropbox_metadata['expires']
+  end
+
+
+  protected
+
+
+  def dropbox_metadata
+    @dropbox_metadata ||= @dropbox_client.media(@dropbox_path)
   end
 end

@@ -2,15 +2,19 @@ require 'dropbox_sdk'
 require 'open-uri'
 
 class DropboxFile < ActiveRecord::Base
+  include PdfExtension
+
+
   #FORMATS = ['djvu', 'pdf', 'epub', 'fb2']
   FORMATS = ['pdf']
 
   attr_accessible :path
 
-  include PdfExtension
-
   belongs_to :book
   has_one :user, :through => :book
+
+  validate :user_files_uniqueness
+
 
   before_create :set_book_name
 
@@ -29,9 +33,7 @@ class DropboxFile < ActiveRecord::Base
 
 
   def bookfile
-    dropbox_metadata = dropbox_client.media(path)
-    Bookfile.new( extension, { :expires => dropbox_metadata['expires'],
-                  :dropbox_client => dropbox_client, :dropbox_path => path } )
+    Bookfile.new( extension, { :dropbox_client => dropbox_client, :dropbox_path => path } )
   end
 
 
@@ -65,6 +67,16 @@ class DropboxFile < ActiveRecord::Base
       temp_file_path = open( tmp_url )
     end
     File.open(temp_file_path)
+  end
+
+
+  def user_files_uniqueness
+    user.dropbox_files.each do |dropbox_file|
+      if "#{modified}#{revision}#{path}" == "#{dropbox_file.modified}#{dropbox_file.revision}#{dropbox_file.path}"
+        errors.add(:base, "This #{modified}#{revision}#{path} Dropbox File already exists")
+        break
+      end
+    end
   end
 
 
