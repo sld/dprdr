@@ -1,9 +1,9 @@
 DPReader @ RailsRumble 2013
 ========================
 
-Your pdf and djvu in a cloud.
+Ebook reader in a cloud.
 
-Site: http://dpreader.r13.railsrumble.com/
+Site: http://dprdr.com/
 
 Entry on RailsRumble: http://railsrumble.com/entries/535-dpreader-your-djvu-and-pdf-in-a-cloud
 
