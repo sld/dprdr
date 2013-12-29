@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_or_guest_user, :is_guest?
+  helper_method :current_or_guest_user, :is_guest?, :dropbox_activated?
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, :alert => exception.message
@@ -41,6 +41,11 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     books_path
+  end
+
+
+  def dropbox_activated?
+    false
   end
 
 

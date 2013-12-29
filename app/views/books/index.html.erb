@@ -7,13 +7,14 @@
             <%= link_to( "<span class='genericon genericon-cloud-upload'></span>Upload book".html_safe, new_book_path, :class => 'btn big blue rc' ) %>
         </div>
     </div>
+    
+    <% if current_user.dropbox_user? && dropbox_activated? %>
+        <%= link_to 'Refresh Dropbox Folder', dropbox_refresh_folder_path %>
+    <% end %>
 <% elsif is_guest? %>
     Guest can read only this PDF. To access Uploading and other features, &nbsp;&nbsp;<%= link_to( "<span class='genericon genericon-facebook-alt'></span>Sign in with facebook".html_safe, user_omniauth_authorize_path(:facebook), :class => 'btn dark-blue rc' ) %>&nbsp;&nbsp; or &nbsp;&nbsp;<%= link_to( "<span class='genericon genericon-key'></span>Sign up".html_safe, new_user_registration_path, :class => 'btn yellow rc' ) %>
 <% end %>
-  <% if current_user.dropbox_user? %>
-    <%= link_to 'Refresh Dropbox Folder', dropbox_refresh_folder_path %>
-  <% end %>
-
+  
 </div>
 
 <div class="row">

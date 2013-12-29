@@ -1,6 +1,7 @@
 class DropboxController < ApplicationController
   before_filter :authenticate_user!
   before_filter :check_is_user_dropbox
+  before_filter :is_dropbox_mode_active
 
 
   def folder_select
@@ -27,6 +28,13 @@ class DropboxController < ApplicationController
     unless current_user.dropbox_user?
       raise CanCan::AccessDenied.new("You cannot access to Dropbox part because you are not linked Dropbox account",
                                      :dropbox, DropboxFile)
+    end
+  end
+
+
+  def is_dropbox_mode_active
+    unless dropbox_activated?
+      redirect_to root_path, flash: "Dropbox is not active"
     end
   end
 end
